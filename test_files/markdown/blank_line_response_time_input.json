@@ -1,0 +1,11 @@
+[
+  {
+    "test": "MD-BLANK-1 Structured markdown continuation | file=test_files/markdown/blank_line_autocomplete.md | cursor is on EOF blank line after RUN checklist | continue with next section label instead of empty output.",
+    "target_output": "**VALIDATE**",
+    "file_path": "test_files/markdown/blank_line_autocomplete.md",
+    "language_id": "markdown",
+    "cursor_line": 6,
+    "cursor_char": 1,
+    "row_tags": ["markdown", "blank_line", "structure"]
+  }
+]

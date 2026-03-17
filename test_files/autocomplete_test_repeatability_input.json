@@ -1,0 +1,24 @@
+[
+  {
+    "test": "Repeatability-1 Python | file=test_files/python/complex_autocomplete.py | fixed cursor at return total_with_tax_and_shipping( | generate deterministic completion for same unchanged context.",
+    "target_output": "basket, coupon, 0.07)",
+    "file_path": "test_files/python/complex_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return total_with_tax_and_shipping(",
+    "lock_arg_form": true
+  },
+  {
+    "test": "Repeatability-2 TypeScript | file=test_files/typescript/complex_autocomplete.ts | fixed cursor at const total = checkoutTotal( | generate deterministic completion for same unchanged context.",
+    "target_output": "items, \"USD\", 0.07);",
+    "file_path": "test_files/typescript/complex_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const total = checkoutTotal("
+  },
+  {
+    "test": "Repeatability-3 Java | file=test_files/java/ComplexAutocomplete.java | fixed cursor at double total = checkoutTotal( | generate deterministic completion for same unchanged context.",
+    "target_output": "cart, coupon, 0.07);",
+    "file_path": "test_files/java/ComplexAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "double total = checkoutTotal("
+  }
+]

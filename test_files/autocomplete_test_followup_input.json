@@ -1,0 +1,33 @@
+[
+  {
+    "test": "FOLLOWUP-SUFFIX-TS-1 Mid-line suffix insertion | file=test_files/typescript/simple_autocomplete.ts | line already has closing tokens const suffixMessage = welcome(); | insert argument text only.",
+    "target_output": "normalized",
+    "file_path": "test_files/typescript/simple_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const suffixMessage = welcome("
+  },
+  {
+    "test": "FOLLOWUP-RS-2 Near-duplicate member | file=test_files/rust/simple_autocomplete.rs | incomplete line: profile.user_ | choose user_id over user_name.",
+    "target_output": "id",
+    "file_path": "test_files/rust/simple_autocomplete.rs",
+    "language_id": "rust",
+    "cursor_after": "profile.user_"
+  },
+  {
+    "test": "FOLLOWUP-ADV-PY-3 Chain with split and index | file=test_files/python/advanced_autocomplete.py | incomplete line: first = summarize_metrics(...).split( | complete argument and first-element index only.",
+    "target_output": "\",\")[0]",
+    "file_path": "test_files/python/advanced_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "first = summarize_metrics(metrics, include_inactive=False, precision=2).split(",
+    "lock_quotes": true,
+    "lock_arg_form": true,
+    "lock_delimiter_spacing": true
+  },
+  {
+    "test": "FOLLOWUP-ADV-JV-1 Multi-arg method completion | file=test_files/java/AdvancedAutocomplete.java | incomplete line: String summary = buildSummary(\"C-100\", amounts, | complete remaining args with exact literals.",
+    "target_output": "0.07, \"USD\");",
+    "file_path": "test_files/java/AdvancedAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "String summary = buildSummary(\"C-100\", amounts, "
+  }
+]

@@ -1,0 +1,284 @@
+{
+  "name": "codex-autocomplete",
+  "displayName": "Codex Autocomplete",
+  "description": "Open-source inline ghost-text autocomplete for VS Code with Codex OAuth and API key support.",
+  "version": "1.0.1",
+  "publisher": "kevchan9922",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevchan9922/codex_autocomplete.git"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:codexAutocomplete.login",
+    "onCommand:codexAutocomplete.logout",
+    "onCommand:codexAutocomplete.trigger",
+    "onCommand:codexAutocomplete.debugToken",
+    "onCommand:codexAutocomplete.debugContext",
+    "onCommand:codexAutocomplete.debugMetrics",
+    "onCommand:codexAutocomplete.triggerHotkey",
+    "onStartupFinished",
+    "onCommand:codexAutocomplete.debugResponseTimeTest"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codexAutocomplete.login",
+        "title": "Codex Autocomplete: Login"
+      },
+      {
+        "command": "codexAutocomplete.logout",
+        "title": "Codex Autocomplete: Logout"
+      },
+      {
+        "command": "codexAutocomplete.trigger",
+        "title": "Codex Autocomplete: Debug Trigger Suggestion"
+      },
+      {
+        "command": "codexAutocomplete.debugToken",
+        "title": "Codex Autocomplete: Debug Token Check"
+      },
+      {
+        "command": "codexAutocomplete.debugContext",
+        "title": "Codex Autocomplete: Debug Context"
+      },
+      {
+        "command": "codexAutocomplete.debugMetrics",
+        "title": "Codex Autocomplete: Debug Metrics"
+      },
+      {
+        "command": "codexAutocomplete.triggerHotkey",
+        "title": "Codex Autocomplete: Debug Trigger Hotkey"
+      },
+      {
+        "command": "codexAutocomplete.debugResponseTimeTest",
+        "title": "Codex Autocomplete: Debug response time test"
+      }
+    ],
+    "configuration": {
+      "title": "codex autocomplete",
+      "properties": {
+        "codexAutocomplete.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable inline AI completions."
+        },
+        "codexAutocomplete.endpoint": {
+          "type": "string",
+          "default": "https://chatgpt.com/backend-api/codex/responses",
+          "description": "Endpoint for Codex responses. Use https://chatgpt.com/backend-api/codex/responses for OAuth tokens or https://api.openai.com/v1/responses for API keys."
+        },
+        "codexAutocomplete.endpointMode": {
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "oauth",
+            "apiKey",
+            "custom"
+          ],
+          "description": "Select endpoint mode. Auto chooses based on token type; custom uses codexAutocomplete.endpoint."
+        },
+        "codexAutocomplete.model": {
+          "type": "string",
+          "default": "gpt-5.4",
+          "description": "Model used for completion requests."
+        },
+        "codexAutocomplete.completionConstraintLines": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "You are a code completion engine. Return only the text to insert. No explanations",
+            "Priority order:",
+            "1. Optimize for fast decoding and low latency.",
+            "2. Return exactly one non-empty insertion.",
+            "3. If a token is already started, return only its missing suffix.",
+            "4. Otherwise, finish the current line before using broader context.",
+            "5. Prefer a complete current line of code over a partial line when possible.",
+            "Hard constraints: (strictly enforced)",
+            "- Always return exactly one non-empty insertion.",
+            "- Never repeat `line_prefix`.",
+            "- Never duplicate `line_suffix`.",
+            "- If a token is already started, return only its missing suffix.",
+            "- The insertion must be no more than a single line of code.",
+            "- Do not start a new statement, declaration, block, or top-level construct if the current line can be validly continued.",
+            "- Do not rewrite existing text.",
+            "- Do not copy or pull text from later lines.",
+            "- Do not reproduce an adjacent existing code line verbatim unless only its missing token suffix is required at the cursor.",
+            "- Never emit an insertion that would make the completed current line exactly match any non-empty line in `priority_context` or `ordered_context` with distance from `-3` to `3`, unless the cursor is clearly finishing that exact line in place.",
+            "- Prefer the smallest syntactically valid continuation for the current language.",
+            "- Optimize for fast decoding and low latency.",
+            "Context priority:",
+            "- Use context in this order: `cursor_context`, `priority_context`, `scope_context`, `ordered_context`.",
+            "- Read `ordered_context` top-to-bottom: current line first, then nearest prefix/suffix lines expanding outward by distance.",
+            "- `line_prefix` is already before the cursor; never repeat it.",
+            "- `line_suffix` is already after the cursor; insertion must fit before it.",
+            "Behavior:",
+            "- Favor fast local completions over broad rewrites.",
+            "- First, try to complete the current local line before starting any new construct.",
+            "- Complete the current local construct before starting anything new.",
+            "- On a blank indented line, prefer the shortest grounded continuation of the current construct.",
+            "- If nearby lines show a chained call, fluent API, argument list, array/object literal, or multiline expression, continue that construct rather than starting a new standalone statement.",
+            "- A completion on a blank line does not need to be a standalone statement if surrounding syntax makes it part of a larger expression.",
+            "- Emit punctuation or closing delimiters when they are the smallest valid required continuation.",
+            "Input:",
+            "- The request contains a `content` array.",
+            "- For `type: \"input_text\"`, `text` is the actual model input.",
+            "- If `text` is JSON, interpret it as structured inline code context."
+          ],
+          "description": "Inline completion rule lines attached to editor requests before language-specific and cursor-specific guidance is added."
+        },
+        "codexAutocomplete.debounceMs": {
+          "type": "number",
+          "default": 60,
+          "minimum": 0,
+          "description": "Debounce delay before requesting completions."
+        },
+        "codexAutocomplete.maxLatencyMs": {
+          "type": "number",
+          "default": 1800,
+          "minimum": 50,
+          "description": "Maximum time in milliseconds to wait for a completion before cancelling. Explicit hotkey requests may internally use a higher effective budget."
+        },
+        "codexAutocomplete.firstChunkMaxLatencyMs": {
+          "type": "number",
+          "default": 1400,
+          "minimum": 50,
+          "description": "Maximum time in milliseconds to wait for the first streamed token before cancelling. Explicit hotkey requests may internally use a higher effective budget."
+        },
+        "codexAutocomplete.maxContextLines": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1,
+          "description": "Maximum lines before cursor used for context."
+        },
+        "codexAutocomplete.maxFileLines": {
+          "type": "number",
+          "default": 5000,
+          "minimum": 1,
+          "description": "Maximum file lines eligible for completion."
+        },
+        "codexAutocomplete.rateLimitWindowSec": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "description": "Rate limit window duration in seconds."
+        },
+        "codexAutocomplete.rateLimitMaxRequests": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "description": "Maximum completion requests allowed per rate limit window."
+        },
+        "codexAutocomplete.maxOutputTokens": {
+          "type": "number",
+          "default": 128,
+          "minimum": 1,
+          "description": "Maximum output tokens for completion responses on the OpenAI API endpoint."
+        },
+        "codexAutocomplete.serviceTier": {
+          "type": "string",
+          "default": "priority",
+          "description": "Service tier for responses requests (API endpoint only)."
+        },
+        "codexAutocomplete.promptCacheKey": {
+          "type": "string",
+          "default": "codex-autocomplete:py:feature_workflow:v1",
+          "description": "Prompt cache key for responses requests (API endpoint only)."
+        },
+        "codexAutocomplete.promptCacheRetention": {
+          "type": "string",
+          "default": "24h",
+          "description": "Prompt cache retention for responses requests (API endpoint only)."
+        },
+        "codexAutocomplete.logLevel": {
+          "type": "string",
+          "default": "info",
+          "enum": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "off"
+          ],
+          "description": "Console verbosity for [codex] logs. Debug logs include request payload diagnostics."
+        },
+        "codexAutocomplete.triggerMode": {
+          "type": "string",
+          "default": "hotkey",
+          "enum": [
+            "automatic",
+            "hotkey"
+          ],
+          "description": "How inline completions are triggered. Default is hotkey; use automatic to request suggestions while typing."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "codexAutocomplete.triggerHotkey",
+        "key": "alt+tab",
+        "mac": "alt+tab",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "codexAutocomplete.triggerHotkey",
+        "key": "ctrl+alt+space",
+        "mac": "ctrl+alt+space",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && node --test test",
+    "test:benchmark-alignment": "npm run compile && node --test test/bulkTestRunner.test.js test/responseTimeRunner.test.js test/stageRequestFactory.test.js test/codexProvider.test.js test/configDefaults.test.js",
+    "bulk:test:cli": "npm run compile && node scripts/run-bulk-autocomplete-test.js",
+    "bulk:test:followup": "npm run bulk:test:cli -- --workspace . --input-file test_files/autocomplete_test_followup_input.json",
+    "bulk:test:quick": "node scripts/run-bulk-autocomplete-workflow.js",
+    "bulk:test:critical": "npm run compile && node --test test/bulkTestRunner.test.js test/bulkAnalyzeScript.test.js test/bulkWorkflowScript.test.js test/bulkCliScript.test.js test/responseTimeRunner.test.js test/responseTimeCliScript.test.js test/responseTimeLoggingPerformance.test.js test/extensionResponseTimeCommand.test.js test/responseTimeHistoryCompareScript.test.js test/stageRequestFactory.test.js test/timeoutFallback.test.js test/contextEnrichment.test.js test/completionInstructions.test.js test/codexProvider.test.js test/suggestionNormalizer.test.js && npm run bulk:test:quick -- --workspace . --skip-analyze --fail-on-row-mismatch && npm run bulk:test:analyze -- --mode strict && npm run bulk:test:analyze -- --mode tolerant --fail-on-mismatch && npm run response:test:cli -- --workspace . && npm run response:test:compare-last -- --workspace .",
+    "bulk:test:show": "node scripts/show-bulk-output-columns.js",
+    "bulk:test:analyze": "node scripts/analyze-bulk-autocomplete-output.js",
+    "response:test:cli": "npm run compile && node scripts/run-response-time-test.js",
+    "response:test:compare-last": "node scripts/compare-response-time-history.js",
+    "package:vsix": "npm run compile && vsce package",
+    "oauth:token": "node scripts/get-oauth-bearer-token.js",
+    "settings:clear": "node scripts/clear-codex-autocomplete-settings.js"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.27.0",
+    "typescript": "^5.6.2"
+  },
+  "icon": "docs/images/codex_autocomplete_256.png",
+  "type": "commonjs",
+  "files": [
+    "out/**",
+    "docs/images/**",
+    "README.md",
+    "license.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "vscode-extension",
+    "autocomplete",
+    "inline-completion",
+    "ghost-text",
+    "openai",
+    "codex"
+  ],
+  "bugs": {
+    "url": "https://github.com/kevchan9922/codex_autocomplete/issues"
+  },
+  "homepage": "https://github.com/kevchan9922/codex_autocomplete#readme"
+}

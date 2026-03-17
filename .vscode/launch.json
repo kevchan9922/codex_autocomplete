@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=/Users/kevinchan/tab_autocomplete",
+        "--disable-extensions",
+        "--disable-extension=openai.chatgpt",
+        "--disable-extension=GitHub.copilot",
+        "--disable-extension=GitHub.copilot-chat",
+        "--transient",
+        "--user-data-dir=/Users/kevinchan/tab_autocomplete/.vscode-test/user-data",
+        "--new-window",
+        "/Users/kevinchan/tab_autocomplete/.vscode/dev-host.code-workspace"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "preLaunchTask": "npm: compile"
+    }
+  ]
+}

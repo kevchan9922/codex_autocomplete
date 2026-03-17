@@ -1,0 +1,106 @@
+[
+  {
+    "test": "PY-1 Simple autocomplete | file=test_files/python/simple_autocomplete.py | cursor after: message = greet_user( | complete with exact string literal \"Mina\" (do not use profile variable) and valid Python syntax.",
+    "target_output": "\"Mina\")",
+    "file_path": "test_files/python/simple_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "message = greet_user(",
+    "lock_quotes": true,
+    "lock_arg_form": true
+  },
+  {
+    "test": "PY-3 Complex autocomplete | file=test_files/python/complex_autocomplete.py | cursor at: return total_with_tax_and_shipping( in checkout_preview() | available variables: basket, coupon | function signature: total_with_tax_and_shipping(items, coupon, tax_rate) -> float | finish call coherently.",
+    "target_output": "basket, coupon, 0.07)",
+    "file_path": "test_files/python/complex_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return total_with_tax_and_shipping("
+  },
+  {
+    "test": "TS-1 Simple autocomplete | file=test_files/typescript/simple_autocomplete.ts | cursor after: const message = welcome( | nearby symbol: normalized from titleCase('sAm lee') | complete with valid TypeScript syntax.",
+    "target_output": "normalized);",
+    "file_path": "test_files/typescript/simple_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const message = welcome("
+  },
+  {
+    "test": "TS-3 Complex autocomplete | file=test_files/typescript/complex_autocomplete.ts | cursor at: const total = checkoutTotal( | signature: checkoutTotal(items, currency, taxRate, discount?) | in-scope items variable exists | complete arguments in coherent order.",
+    "target_output": "items, \"USD\", 0.07);",
+    "file_path": "test_files/typescript/complex_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const total = checkoutTotal("
+  },
+  {
+    "test": "JV-1 Simple autocomplete | file=test_files/java/SimpleAutocomplete.java | cursor after: String message = greet( | in-scope variable: name from formatName('Rina', 'Patel') | complete Java call and statement.",
+    "target_output": "name);",
+    "file_path": "test_files/java/SimpleAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "String message = greet("
+  },
+  {
+    "test": "JV-3 Complex autocomplete | file=test_files/java/ComplexAutocomplete.java | cursor at: double total = checkoutTotal( | in-scope: cart, coupon | signature checkoutTotal(List<Item> items, Coupon coupon, double taxRate) | complete arguments and closing syntax.",
+    "target_output": "cart, coupon, 0.07);",
+    "file_path": "test_files/java/ComplexAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "double total = checkoutTotal("
+  },
+  {
+    "test": "CHAIN-PY-1 Method chain continuation | file=test_files/python/patterns_autocomplete.py | incomplete line: return message.strip().low | complete final method suffix only.",
+    "target_output": "er()",
+    "file_path": "test_files/python/patterns_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return message.strip().low"
+  },
+  {
+    "test": "CHAIN-TS-1 Method chain continuation | file=test_files/typescript/patterns_autocomplete.ts | incomplete line: const upper = person.name.to | complete chain method with minimal suffix.",
+    "target_output": "UpperCase();",
+    "file_path": "test_files/typescript/patterns_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const upper = person.name.to"
+  },
+  {
+    "test": "ADV-PY-1 Keyword-heavy call completion | file=test_files/python/advanced_autocomplete.py | incomplete line: query = build_query(\"users\", filters, | complete remaining positional + keyword args with exact literals.",
+    "target_output": "25, order_by=\"created_at\")",
+    "file_path": "test_files/python/advanced_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "query = build_query(\"users\", filters, ",
+    "lock_arg_form": true,
+    "lock_quotes": true
+  },
+  {
+    "test": "ADV-TS-1 Object argument completion | file=test_files/typescript/advanced_autocomplete.ts | incomplete line: const invoice = buildInvoice(\"C-100\", items, | complete object arg with exact literals and close call.",
+    "target_output": "{ taxRate: 0.07, currency: \"USD\" });",
+    "file_path": "test_files/typescript/advanced_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const invoice = buildInvoice(\"C-100\", items, ",
+    "lock_object_key_order": true,
+    "lock_quotes": true
+  },
+  {
+    "test": "NearDuplicate-1 Python | file=test_files/python/large_autocomplete.py | locals near cursor: report, report_text, report_summary | incomplete line: return report_ | target expression should pick report_text and remain valid Python.",
+    "target_output": "text",
+    "file_path": "test_files/python/large_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return report_"
+  },
+  {
+    "test": "NearDuplicate-2 TypeScript | file=test_files/typescript/large_autocomplete.ts | locals near cursor: open, openPointsTotal, openPointsByPriority | incomplete line: return openPointsByPriority( | target expression should choose the intended helper and complete valid TS code.",
+    "target_output": "\"P1\");",
+    "file_path": "test_files/typescript/large_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "return openPointsByPriority("
+  },
+  {
+    "test": "Boundary-1 Python large file | file=test_files/python/large_autocomplete.py | top/middle/bottom target depending on far helper references | completion should stay relevant to distant helper definitions and remain syntactically valid.",
+    "target_output": "<scenario-dependent>",
+    "file_path": "test_files/python/large_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return text.splitlines("
+  },
+  {
+    "test": "PAT-JV-2 Missing semicolon | file=test_files/java/PatternsAutocomplete.java | line: int count = values.size() | complete statement terminator only.",
+    "target_output": ";",
+    "file_path": "test_files/java/PatternsAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "int count = values.size()"
+  }
+]

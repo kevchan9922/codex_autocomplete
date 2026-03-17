@@ -1,0 +1,642 @@
+[
+  {
+    "test": "PY-1 Simple autocomplete | file=test_files/python/simple_autocomplete.py | cursor after: message = greet_user( | complete with exact string literal \"Mina\" (do not use profile variable) and valid Python syntax.",
+    "target_output": "\"Mina\")",
+    "file_path": "test_files/python/simple_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "message = greet_user(",
+    "lock_quotes": true,
+    "lock_arg_form": true
+  },
+  {
+    "test": "PY-BLANK-1 Blank-line insertion | file=test_files/python/blank_line_autocomplete.py | cursor is on an indented blank line before return message | define message using build_message and normalized_name.",
+    "target_output": "message = build_message(normalized_name)",
+    "file_path": "test_files/python/blank_line_autocomplete.py",
+    "language_id": "python",
+    "cursor_line": 11,
+    "cursor_char": 5,
+    "lock_arg_form": true
+  },
+  {
+    "test": "PY-2 Large-file autocomplete | file=test_files/python/large_autocomplete.py | inserted block: def quick_check() -> str:\\n    text = build_report(METRICS)\\n    return text.splitlines( | complete splitlines call so return type remains str and syntax is valid.",
+    "target_output": ")[0]",
+    "file_path": "test_files/python/large_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return text.splitlines("
+  },
+  {
+    "test": "PY-3 Complex autocomplete | file=test_files/python/complex_autocomplete.py | cursor at: return total_with_tax_and_shipping( in checkout_preview() | available variables: basket, coupon | function signature: total_with_tax_and_shipping(items, coupon, tax_rate) -> float | finish call coherently.",
+    "target_output": "basket, coupon, 0.07)",
+    "file_path": "test_files/python/complex_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return total_with_tax_and_shipping("
+  },
+  {
+    "test": "TS-1 Simple autocomplete | file=test_files/typescript/simple_autocomplete.ts | cursor after: const message = welcome( | nearby symbol: normalized from titleCase('sAm lee') | complete with valid TypeScript syntax.",
+    "target_output": "normalized);",
+    "file_path": "test_files/typescript/simple_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const message = welcome("
+  },
+  {
+    "test": "TS-2 Large-file autocomplete | file=test_files/typescript/large_autocomplete.ts | inserted function: export function p1Snapshot(): string { return summarizePriority( } | union type for priority is P0|P1|P2 | complete call with a valid literal and syntax.",
+    "target_output": "\"P1\");",
+    "file_path": "test_files/typescript/large_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "return summarizePriority(",
+    "lock_quotes": true
+  },
+  {
+    "test": "TS-3 Complex autocomplete | file=test_files/typescript/complex_autocomplete.ts | cursor at: const total = checkoutTotal( | signature: checkoutTotal(items, currency, taxRate, discount?) | in-scope items variable exists | complete arguments in coherent order.",
+    "target_output": "items, \"USD\", 0.07);",
+    "file_path": "test_files/typescript/complex_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const total = checkoutTotal("
+  },
+  {
+    "test": "JV-1 Simple autocomplete | file=test_files/java/SimpleAutocomplete.java | cursor after: String message = greet( | in-scope variable: name from formatName('Rina', 'Patel') | complete Java call and statement.",
+    "target_output": "name);",
+    "file_path": "test_files/java/SimpleAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "String message = greet("
+  },
+  {
+    "test": "JV-2 Large-file autocomplete | file=test_files/java/LargeAutocomplete.java | inserted function: static String p0Summary() { return summarizeMetric( } | available list: METRICS | summarizeMetric expects Metric | complete call with valid Java syntax.",
+    "target_output": "METRICS.get(0));",
+    "file_path": "test_files/java/LargeAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "return summarizeMetric(",
+    "lock_arg_form": true
+  },
+  {
+    "test": "JV-3 Complex autocomplete | file=test_files/java/ComplexAutocomplete.java | cursor at: double total = checkoutTotal( | in-scope: cart, coupon | signature checkoutTotal(List<Item> items, Coupon coupon, double taxRate) | complete arguments and closing syntax.",
+    "target_output": "cart, coupon, 0.07);",
+    "file_path": "test_files/java/ComplexAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "double total = checkoutTotal("
+  },
+  {
+    "test": "CF-PY-1 Cross-file consumer | file=test_files/python/cross_file_consumer.py | imported greet from utils and local user symbol in scope | complete imported call argument from local object.",
+    "target_output": "user.name)",
+    "file_path": "test_files/python/cross_file_consumer.py",
+    "language_id": "python",
+    "cursor_after": "message = greet("
+  },
+  {
+    "test": "CF-TS-1 Cross-file consumer | file=test_files/typescript/cross_file_consumer.ts | imported welcome from simple_autocomplete and local label in scope | complete imported call argument from local symbol.",
+    "target_output": "label);",
+    "file_path": "test_files/typescript/cross_file_consumer.ts",
+    "language_id": "typescript",
+    "cursor_after": "const message = welcome("
+  },
+  {
+    "test": "CF-JV-1 Cross-file consumer | file=test_files/java/CrossFileConsumer.java | use LargeAutocomplete helper with shared metrics constant | complete cross-file static call argument.",
+    "target_output": "LargeAutocomplete.METRICS.get(0));",
+    "file_path": "test_files/java/CrossFileConsumer.java",
+    "language_id": "java",
+    "cursor_after": "String summary = LargeAutocomplete.summarizeMetric(",
+    "lock_quotes": true,
+    "lock_arg_form": true
+  },
+  {
+    "test": "CHAIN-PY-1 Method chain continuation | file=test_files/python/patterns_autocomplete.py | incomplete line: return message.strip().low | complete final method suffix only.",
+    "target_output": "er()",
+    "file_path": "test_files/python/patterns_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return message.strip().low"
+  },
+  {
+    "test": "CHAIN-TS-1 Method chain continuation | file=test_files/typescript/patterns_autocomplete.ts | incomplete line: const upper = person.name.to | complete chain method with minimal suffix.",
+    "target_output": "UpperCase();",
+    "file_path": "test_files/typescript/patterns_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const upper = person.name.to"
+  },
+  {
+    "test": "CHAIN-JV-1 Method chain continuation | file=test_files/java/PatternsAutocomplete.java | incomplete line: return value.trim().to | complete Java chain method with minimal suffix.",
+    "target_output": "UpperCase();",
+    "file_path": "test_files/java/PatternsAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "return value.trim().to"
+  },
+  {
+    "test": "ARGS-PY-1 Explicit final argument | file=test_files/python/complex_autocomplete.py | incomplete line: return total_with_tax_and_shipping(basket, coupon, | complete exact tax-rate literal only.",
+    "target_output": "0.07)",
+    "file_path": "test_files/python/complex_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return total_with_tax_and_shipping(basket, coupon, "
+  },
+  {
+    "test": "ARGS-TS-1 Optional argument started | file=test_files/typescript/complex_autocomplete.ts | optional discount argument has already started | complete object literal argument and close call.",
+    "target_output": "{ kind: \"percent\", value: 10 });",
+    "file_path": "test_files/typescript/complex_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const discountPreview = checkoutTotal(items, \"USD\", 0.07, "
+  },
+  {
+    "test": "ARGS-JV-1 Constructor arguments | file=test_files/java/ComplexAutocomplete.java | incomplete coupon constructor call | complete constructor args with exact literals.",
+    "target_output": "\"WELCOME10\", \"percent\", 10.0);",
+    "file_path": "test_files/java/ComplexAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "Coupon draftCoupon = new Coupon("
+  },
+  {
+    "test": "SUFFIX-PY-1 Mid-line suffix insertion | file=test_files/python/simple_autocomplete.py | line already has closing tokens message2 = greet_user() | insert argument text only.",
+    "target_output": "\"Mina\"",
+    "file_path": "test_files/python/simple_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "message2 = greet_user("
+  },
+  {
+    "test": "SUFFIX-TS-1 Mid-line suffix insertion | file=test_files/typescript/simple_autocomplete.ts | line already has closing tokens const suffixMessage = welcome(); | insert argument text only.",
+    "target_output": "normalized",
+    "file_path": "test_files/typescript/simple_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const suffixMessage = welcome("
+  },
+  {
+    "test": "SUFFIX-JV-1 Mid-line suffix insertion | file=test_files/java/SimpleAutocomplete.java | line already has closing tokens String suffixMessage = greet(); | insert argument text only.",
+    "target_output": "name",
+    "file_path": "test_files/java/SimpleAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "String suffixMessage = greet("
+  },
+  {
+    "test": "GO-1 Simple autocomplete | file=test_files/go/simple_autocomplete.go | cursor after: message := welcome( | in-scope variable name is expected.",
+    "target_output": "name)",
+    "file_path": "test_files/go/simple_autocomplete.go",
+    "language_id": "go",
+    "cursor_after": "message := welcome("
+  },
+  {
+    "test": "GO-2 Near-duplicate member | file=test_files/go/simple_autocomplete.go | incomplete line: return user.Firs | choose FirstName over FirstLogin.",
+    "target_output": "tName",
+    "file_path": "test_files/go/simple_autocomplete.go",
+    "language_id": "go",
+    "cursor_after": "return user.Firs"
+  },
+  {
+    "test": "GO-3 Bracket closure | file=test_files/go/simple_autocomplete.go | incomplete line: first := values[0 | complete missing bracket only.",
+    "target_output": "]",
+    "file_path": "test_files/go/simple_autocomplete.go",
+    "language_id": "go",
+    "cursor_after": "first := values[0"
+  },
+  {
+    "test": "CS-1 Simple autocomplete | file=test_files/csharp/simple_autocomplete.cs | cursor after: var message = Welcome( | in-scope variable normalized is expected.",
+    "target_output": "normalized);",
+    "file_path": "test_files/csharp/simple_autocomplete.cs",
+    "language_id": "csharp",
+    "cursor_after": "var message = Welcome("
+  },
+  {
+    "test": "CS-2 Near-duplicate property | file=test_files/csharp/simple_autocomplete.cs | incomplete line: return user.Address.Ci | choose City over Country.",
+    "target_output": "ty",
+    "file_path": "test_files/csharp/simple_autocomplete.cs",
+    "language_id": "csharp",
+    "cursor_after": "return user.Address.Ci"
+  },
+  {
+    "test": "CS-3 Generic list close | file=test_files/csharp/simple_autocomplete.cs | incomplete line: var ids = new List<int | complete generic close and constructor call.",
+    "target_output": ">();",
+    "file_path": "test_files/csharp/simple_autocomplete.cs",
+    "language_id": "csharp",
+    "cursor_after": "var ids = new List<int"
+  },
+  {
+    "test": "RS-1 Simple autocomplete | file=test_files/rust/simple_autocomplete.rs | cursor after: let message = welcome( | in-scope variable name is expected.",
+    "target_output": "name);",
+    "file_path": "test_files/rust/simple_autocomplete.rs",
+    "language_id": "rust",
+    "cursor_after": "let message = welcome("
+  },
+  {
+    "test": "RS-2 Near-duplicate member | file=test_files/rust/simple_autocomplete.rs | incomplete line: profile.user_ | choose user_id over user_name.",
+    "target_output": "id",
+    "file_path": "test_files/rust/simple_autocomplete.rs",
+    "language_id": "rust",
+    "cursor_after": "profile.user_"
+  },
+  {
+    "test": "RS-3 Vec bracket closure | file=test_files/rust/simple_autocomplete.rs | incomplete line: let values = vec![1, 2, 3 | complete missing bracket only.",
+    "target_output": "];",
+    "file_path": "test_files/rust/simple_autocomplete.rs",
+    "language_id": "rust",
+    "cursor_after": "let values = vec![1, 2, 3"
+  },
+  {
+    "test": "JS-1 Simple autocomplete | file=test_files/javascript/simple_autocomplete.js | cursor after: const message = welcome( | in-scope variable normalized is expected.",
+    "target_output": "normalized);",
+    "file_path": "test_files/javascript/simple_autocomplete.js",
+    "language_id": "javascript",
+    "cursor_after": "const message = welcome(",
+    "lock_arg_form": true
+  },
+  {
+    "test": "JS-2 Optional arg not started | file=test_files/javascript/simple_autocomplete.js | incomplete line: const payload = JSON.stringify(data | complete closing paren only.",
+    "target_output": ")",
+    "file_path": "test_files/javascript/simple_autocomplete.js",
+    "language_id": "javascript",
+    "cursor_after": "const payload = JSON.stringify(data"
+  },
+  {
+    "test": "JS-3 Method chain continuation | file=test_files/javascript/simple_autocomplete.js | incomplete line: const upper = name.to | complete chain method with minimal suffix.",
+    "target_output": "UpperCase();",
+    "file_path": "test_files/javascript/simple_autocomplete.js",
+    "language_id": "javascript",
+    "cursor_after": "const upper = name.to"
+  },
+  {
+    "test": "MASK-PY-1 Incomplete word completion | file=test_files/python/simple_autocomplete.py | masked local variable in return statement should complete to existing profile symbol.",
+    "target_output": "le",
+    "file_path": "test_files/python/simple_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return profi"
+  },
+  {
+    "test": "MASK-TS-1 Incomplete word completion | file=test_files/typescript/simple_autocomplete.ts | masked local variable in return statement should complete to existing normalized symbol.",
+    "target_output": "ed",
+    "file_path": "test_files/typescript/simple_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "return normaliz"
+  },
+  {
+    "test": "MASK-JV-1 Incomplete word completion | file=test_files/java/SimpleAutocomplete.java | masked local variable in return statement should complete to existing name symbol.",
+    "target_output": "e",
+    "file_path": "test_files/java/SimpleAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "return nam"
+  },
+  {
+    "test": "MASK-GO-1 Incomplete word completion | file=test_files/go/simple_autocomplete.go | masked local variable in return statement should complete to existing name symbol.",
+    "target_output": "e",
+    "file_path": "test_files/go/simple_autocomplete.go",
+    "language_id": "go",
+    "cursor_after": "return nam"
+  },
+  {
+    "test": "MASK-CS-1 Incomplete word completion | file=test_files/csharp/simple_autocomplete.cs | masked local variable in return statement should complete to existing normalized symbol.",
+    "target_output": "d",
+    "file_path": "test_files/csharp/simple_autocomplete.cs",
+    "language_id": "csharp",
+    "cursor_after": "return normalize"
+  },
+  {
+    "test": "MASK-RS-1 Incomplete word completion | file=test_files/rust/simple_autocomplete.rs | masked local variable in final expression should complete to existing message symbol.",
+    "target_output": "e",
+    "file_path": "test_files/rust/simple_autocomplete.rs",
+    "language_id": "rust",
+    "cursor_after": "    messag"
+  },
+  {
+    "test": "MASK-JS-1 Incomplete word completion | file=test_files/javascript/simple_autocomplete.js | masked local variable in return statement should complete to existing normalized symbol.",
+    "target_output": "ed",
+    "file_path": "test_files/javascript/simple_autocomplete.js",
+    "language_id": "javascript",
+    "cursor_after": "return normaliz"
+  },
+  {
+    "test": "ADV-PY-1 Keyword-heavy call completion | file=test_files/python/advanced_autocomplete.py | incomplete line: query = build_query(\"users\", filters, | complete remaining positional + keyword args with exact literals.",
+    "target_output": "25, order_by=\"created_at\")",
+    "file_path": "test_files/python/advanced_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "query = build_query(\"users\", filters, ",
+    "lock_arg_form": true,
+    "lock_quotes": true
+  },
+  {
+    "test": "ADV-PY-COMMENT-1 Comment completion | file=test_files/python/advanced_autocomplete.py | incomplete line: # | complete concise inline comment suffix only.",
+    "target_output": " add docs for expected build_query args",
+    "file_path": "test_files/python/advanced_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "    #"
+  },
+  {
+    "test": "ADV-PY-2 F-string interpolation closure | file=test_files/python/advanced_autocomplete.py | incomplete line: message = f\"User {user['name'] | close interpolation and string only.",
+    "target_output": "}\"",
+    "file_path": "test_files/python/advanced_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "message = f\"User {user['name']",
+    "lock_quotes": true
+  },
+  {
+    "test": "ADV-PY-3 Chain with split and index | file=test_files/python/advanced_autocomplete.py | incomplete line: first = summarize_metrics(...).split( | complete argument and first-element index only.",
+    "target_output": "\",\")[0]",
+    "file_path": "test_files/python/advanced_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "first = summarize_metrics(metrics, include_inactive=False, precision=2).split(",
+    "lock_quotes": true,
+    "lock_arg_form": true,
+    "lock_delimiter_spacing": true
+  },
+  {
+    "test": "ADV-PY-4 Return variable suffix | file=test_files/python/advanced_autocomplete.py | incomplete line: return | complete local variable suffix only.",
+    "target_output": " first",
+    "file_path": "test_files/python/advanced_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "    return",
+    "cursor_after_occurrence": 5
+  },
+  {
+    "test": "ADV-TS-1 Object argument completion | file=test_files/typescript/advanced_autocomplete.ts | incomplete line: const invoice = buildInvoice(\"C-100\", items, | complete object arg with exact literals and close call.",
+    "target_output": "{ taxRate: 0.07, currency: \"USD\" });",
+    "file_path": "test_files/typescript/advanced_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const invoice = buildInvoice(\"C-100\", items, ",
+    "lock_object_key_order": true,
+    "lock_quotes": true
+  },
+  {
+    "test": "ADV-TS-2 Template literal closure | file=test_files/typescript/advanced_autocomplete.ts | incomplete line: const label = `Invoice ${invoice.id | close interpolation and template literal only.",
+    "target_output": "}`",
+    "file_path": "test_files/typescript/advanced_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const label = `Invoice ${invoice.id"
+  },
+  {
+    "test": "ADV-TS-3 Chain split and index | file=test_files/typescript/advanced_autocomplete.ts | incomplete line: ...join(\", \").split( | complete split arg and first-element index with semicolon.",
+    "target_output": "\", \")[0];",
+    "file_path": "test_files/typescript/advanced_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": ").split("
+  },
+  {
+    "test": "ADV-JV-1 Multi-arg method completion | file=test_files/java/AdvancedAutocomplete.java | incomplete line: String summary = buildSummary(\"C-100\", amounts, | complete remaining args with exact literals.",
+    "target_output": "0.07, \"USD\");",
+    "file_path": "test_files/java/AdvancedAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "String summary = buildSummary(\"C-100\", amounts, ",
+    "lock_quotes": true,
+    "lock_arg_form": true
+  },
+  {
+    "test": "ADV-JV-2 Nested call closure | file=test_files/java/AdvancedAutocomplete.java | incomplete line: String label = String.format(\"Invoice %s\", invoice.id( | close nested accessor and format call only.",
+    "target_output": "));",
+    "file_path": "test_files/java/AdvancedAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "String label = String.format(\"Invoice %s\", invoice.id("
+  },
+  {
+    "test": "ADV-JV-3 Stream collector completion | file=test_files/java/AdvancedAutocomplete.java | incomplete line: ...filter(...).collect( | complete collector expression and close statement.",
+    "target_output": "Collectors.joining(\", \"));",
+    "file_path": "test_files/java/AdvancedAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": ").collect(",
+    "lock_quotes": true,
+    "lock_arg_form": true,
+    "lock_delimiter_spacing": true
+  },
+  {
+    "test": "NearDuplicate-0 Python suffix | file=test_files/python/near_duplicate_suffix_autocomplete.py | locals near cursor: report, report_text, report_summary | incomplete line: return report_s | target should complete the missing suffix for report_summary only.",
+    "target_output": "ummary",
+    "file_path": "test_files/python/near_duplicate_suffix_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return report_s"
+  },
+  {
+    "test": "NearDuplicate-1 Python | file=test_files/python/large_autocomplete.py | locals near cursor: report, report_text, report_summary | incomplete line: return report_ | target expression should pick report_text and remain valid Python.",
+    "target_output": "text",
+    "file_path": "test_files/python/large_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return report_"
+  },
+  {
+    "test": "NearDuplicate-2 TypeScript | file=test_files/typescript/large_autocomplete.ts | locals near cursor: open, openPointsTotal, openPointsByPriority | incomplete line: return openPointsByPriority( | target expression should choose the intended helper and complete valid TS code.",
+    "target_output": "\"P1\");",
+    "file_path": "test_files/typescript/large_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "return openPointsByPriority("
+  },
+  {
+    "test": "NearDuplicate-3 Java | file=test_files/java/LargeAutocomplete.java | locals near cursor: summary, summaryLine, summaryLines | incomplete line: return summaryLines. | target expression should choose summaryLines and complete valid Java code.",
+    "target_output": "size();",
+    "file_path": "test_files/java/LargeAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "return summaryLines."
+  },
+  {
+    "test": "Boundary-1 Python large file | file=test_files/python/large_autocomplete.py | top/middle/bottom target depending on far helper references | completion should stay relevant to distant helper definitions and remain syntactically valid.",
+    "target_output": "<scenario-dependent>",
+    "file_path": "test_files/python/large_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return text.splitlines("
+  },
+  {
+    "test": "Boundary-2 TypeScript large file | file=test_files/typescript/large_autocomplete.ts | top/middle/bottom target depending on far helper references | completion should stay relevant to distant helper definitions and remain syntactically valid.",
+    "target_output": "<scenario-dependent>",
+    "file_path": "test_files/typescript/large_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "return summarizePriority("
+  },
+  {
+    "test": "Boundary-3 Java large file | file=test_files/java/LargeAutocomplete.java | top/middle/bottom target depending on far helper references | completion should stay relevant to distant helper definitions and remain syntactically valid.",
+    "target_output": "<scenario-dependent>",
+    "file_path": "test_files/java/LargeAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "return summarizeMetric("
+  },
+  {
+    "test": "PAT-PY-1 Closure paren | file=test_files/python/patterns_autocomplete.py | incomplete line: print(message | complete minimal suffix only.",
+    "target_output": ")",
+    "file_path": "test_files/python/patterns_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "print(message"
+  },
+  {
+    "test": "PAT-PY-2 Closure bracket | file=test_files/python/patterns_autocomplete.py | incomplete line: numbers = [1, 2, 3 | complete missing list closure only.",
+    "target_output": "]",
+    "file_path": "test_files/python/patterns_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "numbers = [1, 2, 3"
+  },
+  {
+    "test": "PAT-PY-3 Near-duplicate member | file=test_files/python/patterns_autocomplete.py | incomplete line: return self.use | choose user_id over user_name.",
+    "target_output": "r_id",
+    "file_path": "test_files/python/patterns_autocomplete.py",
+    "language_id": "python",
+    "cursor_after": "return self.use"
+  },
+  {
+    "test": "PAT-TS-1 Minimal suffix call | file=test_files/typescript/patterns_autocomplete.ts | incomplete line: const label = formatUserName | insert only missing call with in-scope person.",
+    "target_output": "(person)",
+    "file_path": "test_files/typescript/patterns_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const label = formatUserName"
+  },
+  {
+    "test": "PAT-TS-2 Near-duplicate property | file=test_files/typescript/patterns_autocomplete.ts | incomplete line: const location = person.addr | choose address over addressLine with shortest valid suffix.",
+    "target_output": "ess",
+    "file_path": "test_files/typescript/patterns_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const location = person.addr"
+  },
+  {
+    "test": "PAT-TS-3 Optional arg not started | file=test_files/typescript/patterns_autocomplete.ts | incomplete line: const payload = JSON.stringify(data | complete with closing paren only.",
+    "target_output": ")",
+    "file_path": "test_files/typescript/patterns_autocomplete.ts",
+    "language_id": "typescript",
+    "cursor_after": "const payload = JSON.stringify(data"
+  },
+  {
+    "test": "PAT-JV-1 Minimal suffix call | file=test_files/java/PatternsAutocomplete.java | incomplete line: String label = wrapName | insert only missing call with in-scope name.",
+    "target_output": "(name);",
+    "file_path": "test_files/java/PatternsAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "String label = wrapName"
+  },
+  {
+    "test": "PAT-JV-2 Missing semicolon | file=test_files/java/PatternsAutocomplete.java | line: int count = values.size() | complete statement terminator only.",
+    "target_output": ";",
+    "file_path": "test_files/java/PatternsAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "int count = values.size()"
+  },
+  {
+    "test": "PAT-JV-3 Closure paren | file=test_files/java/PatternsAutocomplete.java | incomplete line: System.out.println(value | complete with closing tokens only.",
+    "target_output": ");",
+    "file_path": "test_files/java/PatternsAutocomplete.java",
+    "language_id": "java",
+    "cursor_after": "System.out.println(value"
+  },
+  {
+    "test": "DOC-PY Suggestion documentation | file=test_files/python/suggestion_documentation.py | cursor after: return wrap_preview( | expected ghost text should complete with local symbol badge and valid syntax.",
+    "target_output": "badge)",
+    "file_path": "test_files/python/suggestion_documentation.py",
+    "language_id": "python",
+    "cursor_after": "return wrap_preview("
+  },
+  {
+    "test": "DOC-TS Suggestion documentation | file=test_files/typescript/suggestion_documentation.ts | cursor after: return wrapPreview( | expected ghost text should complete with local symbol badge and valid TypeScript syntax.",
+    "target_output": "badge);",
+    "file_path": "test_files/typescript/suggestion_documentation.ts",
+    "language_id": "typescript",
+    "cursor_after": "return wrapPreview("
+  },
+  {
+    "test": "DOC-JV Suggestion documentation | file=test_files/java/SuggestionDocumentation.java | cursor after: return wrapPreview( | expected ghost text should complete with local symbol badge and valid Java syntax.",
+    "target_output": "badge);",
+    "file_path": "test_files/java/SuggestionDocumentation.java",
+    "language_id": "java",
+    "cursor_after": "return wrapPreview(",
+    "lock_arg_form": true
+  },
+  {
+    "test": "GEN-PY-1 Call completion | file=test_files/python/generated_autocomplete_cases.py | removed suffix from format_status call.",
+    "target_output": "user, True)",
+    "file_path": "test_files/python/generated_autocomplete_cases.py",
+    "language_id": "python",
+    "cursor_after": "status = format_status("
+  },
+  {
+    "test": "GEN-PY-2 Method suffix | file=test_files/python/generated_autocomplete_cases.py | removed method suffix from return first.up",
+    "target_output": "per()",
+    "file_path": "test_files/python/generated_autocomplete_cases.py",
+    "language_id": "python",
+    "cursor_after": "return first.up"
+  },
+  {
+    "test": "GEN-TS-1 Call completion | file=test_files/typescript/generated_autocomplete_cases.ts | removed suffix from formatStatus call.",
+    "target_output": "user, true);",
+    "file_path": "test_files/typescript/generated_autocomplete_cases.ts",
+    "language_id": "typescript",
+    "cursor_after": "const status = formatStatus("
+  },
+  {
+    "test": "GEN-TS-2 Method suffix | file=test_files/typescript/generated_autocomplete_cases.ts | removed method suffix from return first.toLower",
+    "target_output": "Case()",
+    "file_path": "test_files/typescript/generated_autocomplete_cases.ts",
+    "language_id": "typescript",
+    "cursor_after": "return first.toLower"
+  },
+  {
+    "test": "GEN-JV-1 Call completion | file=test_files/java/GeneratedAutocompleteCases.java | removed suffix from formatStatus call.",
+    "target_output": "user, true);",
+    "file_path": "test_files/java/GeneratedAutocompleteCases.java",
+    "language_id": "java",
+    "cursor_after": "String status = formatStatus("
+  },
+  {
+    "test": "GEN-JV-2 Method suffix | file=test_files/java/GeneratedAutocompleteCases.java | removed method suffix from return value.trim().toLowe",
+    "target_output": "rCase();",
+    "file_path": "test_files/java/GeneratedAutocompleteCases.java",
+    "language_id": "java",
+    "cursor_after": "return value.trim().toLowe"
+  },
+  {
+    "test": "GEN-JS-1 Call completion | file=test_files/javascript/generated_autocomplete_cases.js | removed suffix from formatStatus call.",
+    "target_output": "user, true);",
+    "file_path": "test_files/javascript/generated_autocomplete_cases.js",
+    "language_id": "javascript",
+    "cursor_after": "const status = formatStatus("
+  },
+  {
+    "test": "GEN-JS-2 Method suffix | file=test_files/javascript/generated_autocomplete_cases.js | removed method suffix from return value.trim().toLowe",
+    "target_output": "rCase();",
+    "file_path": "test_files/javascript/generated_autocomplete_cases.js",
+    "language_id": "javascript",
+    "cursor_after": "return value.trim().toLowe"
+  },
+  {
+    "test": "REPO-JS-1 Real test file | file=test/codexProvider.test.js | autocomplete fixture should complete the prompt payload cursor_context property key used in nearby assertions.",
+    "target_output": "line_prefix",
+    "file_path": "test/codexProvider.test.js",
+    "language_id": "javascript",
+    "cursor_after": "return promptPayload.cursor_context['"
+  },
+  {
+    "test": "GEN-GO-1 Call completion | file=test_files/go/generated_autocomplete_cases.go | removed suffix from formatStatus call.",
+    "target_output": "user, true)",
+    "file_path": "test_files/go/generated_autocomplete_cases.go",
+    "language_id": "go",
+    "cursor_after": "status := formatStatus("
+  },
+  {
+    "test": "GEN-GO-2 Function suffix | file=test_files/go/generated_autocomplete_cases.go | removed function suffix from return strings.ToLow",
+    "target_output": "er(value)",
+    "file_path": "test_files/go/generated_autocomplete_cases.go",
+    "language_id": "go",
+    "cursor_after": "return strings.ToLow"
+  },
+  {
+    "test": "GEN-CS-1 Call completion | file=test_files/csharp/GeneratedAutocompleteCases.cs | removed suffix from FormatStatus call.",
+    "target_output": "user, true);",
+    "file_path": "test_files/csharp/GeneratedAutocompleteCases.cs",
+    "language_id": "csharp",
+    "cursor_after": "var status = FormatStatus("
+  },
+  {
+    "test": "GEN-CS-2 Method suffix | file=test_files/csharp/GeneratedAutocompleteCases.cs | removed method suffix from return value.Trim().ToLowe",
+    "target_output": "rInvariant();",
+    "file_path": "test_files/csharp/GeneratedAutocompleteCases.cs",
+    "language_id": "csharp",
+    "cursor_after": "return value.Trim().ToLowe"
+  },
+  {
+    "test": "GEN-RS-1 Call completion | file=test_files/rust/generated_autocomplete_cases.rs | removed suffix from format_status call.",
+    "target_output": "user, true);",
+    "file_path": "test_files/rust/generated_autocomplete_cases.rs",
+    "language_id": "rust",
+    "cursor_after": "let status = format_status("
+  },
+  {
+    "test": "GEN-RS-2 Method suffix | file=test_files/rust/generated_autocomplete_cases.rs | removed method suffix from value.to_low",
+    "target_output": "ercase()",
+    "file_path": "test_files/rust/generated_autocomplete_cases.rs",
+    "language_id": "rust",
+    "cursor_after": "value.to_low"
+  },
+  {
+    "test": "MD-1 Markdown contact copy | file=test_files/markdown/contact_autocomplete.md | cursor after: - Reply-to primary: | copy the nearby primary contact email exactly and do not add extra markdown or punctuation.",
+    "target_output": "mina@example.com",
+    "file_path": "test_files/markdown/contact_autocomplete.md",
+    "language_id": "markdown",
+    "cursor_after": "- Reply-to primary: "
+  },
+  {
+    "test": "TXT-1 Plaintext contact copy | file=test_files/plaintext/contact_autocomplete.txt | cursor after: Reply-to primary: | copy the nearby primary contact email exactly and do not add extra text or punctuation.",
+    "target_output": "mina@example.com",
+    "file_path": "test_files/plaintext/contact_autocomplete.txt",
+    "language_id": "plaintext",
+    "cursor_after": "Reply-to primary: "
+  }
+]

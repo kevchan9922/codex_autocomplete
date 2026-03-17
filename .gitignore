@@ -1,0 +1,13 @@
+node_modules/
+out/
+.vscode-test/
+coverage/
+*.log
+.DS_Store
+
+# Local auth/test artifacts
+test/artifacts/
+test_files/oauth_test_token.txt
+test_artifacts/
+context/
+

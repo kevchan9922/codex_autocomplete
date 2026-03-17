@@ -1,0 +1,35 @@
+# Troubleshooting
+
+- **No suggestions appear**
+  - Ensure `codexAutocomplete.enabled` is true
+  - Confirm OAuth login succeeded
+  - Confirm file is under `codexAutocomplete.maxFileLines`
+- **Hotkey does not trigger**
+  - Use `Ctrl+Alt+Space` as fallback if `Alt+Tab` is intercepted by your OS/window manager.
+  - Verify the binding in VS Code Keyboard Shortcuts for `codexAutocomplete.triggerHotkey`.
+  - You can still run `Codex Autocomplete: Debug Trigger Hotkey` from Command Palette in either trigger mode.
+- **Rate limiting observed**
+  - Reduce typing-trigger frequency or raise `codexAutocomplete.rateLimitMaxRequests`
+- **Stale/duplicate behavior concerns**
+  - Verify completion pipeline + cancellation tests pass via `npm test`
+- **Provider sends keepalive/non-JSON SSE events**
+  - These are ignored safely; completion continues when valid delta events arrive.
+- **Is language/file context sent to the Codex API?**
+  - `LANGUAGE` is always included in the compact inline prompt payload.
+  - `FILE PATH` is kept in local request metadata and logs, but is not currently included in the compact payload sent to Codex.
+- **Need to inspect the exact request/response sent during a run**
+  - Set `codexAutocomplete.logLevel` to `debug`.
+  - Open `Toggle Developer Tools`, then use the `Console` tab to inspect live `[codex]` logs while reproducing the request.
+  - Run `Codex Autocomplete: Debug Context` from the Command Palette with the target editor focused.
+  - In the emitted debug-context report, inspect `fast_request_body` and `full_request_body` for the exact request envelopes, and `fast_prompt_payload` / `full_prompt_payload` for the decoded compact prompt JSON sent inside `input_text`.
+- **Extension host not launching**
+  - Use desktop VS Code (not web-only editors)
+- **Codex Autocomplete commands not shown in Command Palette**
+  - Ensure `code` is VS Code's CLI (run `Shell Command: Install 'code' command in PATH` in VS Code).
+  - Reinstall the VSIX using that CLI, then run `Developer: Reload Window`.
+- **Mermaid diagrams do not render in Markdown preview**
+  - Ensure workspace/user setting `markdown.mermaid.enabled` is `true`
+  - Reopen Markdown preview after changing settings (`Markdown: Open Preview`)
+- **OpenAI auth page shows `Authentication Error` / `AuthApiFailure`**
+  - Rebuild/reload the extension to ensure latest OAuth client configuration is running (`npm run compile`, then restart Extension Development Host)
+  - Retry login from `Codex Autocomplete: Login`

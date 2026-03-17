@@ -1,0 +1,4 @@
+test,target_output
+"Repeatability-1 Python | file=test_files/python/complex_autocomplete.py | fixed cursor at return total_with_tax_and_shipping( | generate deterministic completion for same unchanged context.","basket, coupon, 0.07)"
+"Repeatability-2 TypeScript | file=test_files/typescript/complex_autocomplete.ts | fixed cursor at const total = checkoutTotal( | generate deterministic completion for same unchanged context.","items, ""USD"", 0.07);"
+"Repeatability-3 Java | file=test_files/java/ComplexAutocomplete.java | fixed cursor at double total = checkoutTotal( | generate deterministic completion for same unchanged context.","cart, coupon, 0.07);"

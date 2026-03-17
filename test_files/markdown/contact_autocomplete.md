@@ -1,0 +1,5 @@
+# Team Notes
+
+- Primary contact: mina@example.com
+- Secondary contact: omar@example.com
+- Reply-to primary: 

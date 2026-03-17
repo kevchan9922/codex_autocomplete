@@ -1,0 +1,5 @@
+{
+  "markdown.mermaid.enabled": true,
+  "aiCompletion.triggerMode": "hotkey",
+  "chatgpt.openOnStartup": false
+}
