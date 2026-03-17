@@ -33,6 +33,10 @@ It is especially useful if you:
 - **Configurable behavior** - Tune trigger mode, latency handling, and request limits
 - **Open source** - Review the implementation, adapt it to your needs, and contribute improvements
 
+</br>
+<img src="./docs/images/try_it_out.gif" alt="try it out" width="75%" />
+</br>
+
 ## Get Started
 
 Three easy steps to get started:
