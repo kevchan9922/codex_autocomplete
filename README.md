@@ -49,8 +49,8 @@ Three easy steps to get started:
     
     Via extension marketplace
 
-    - Open Extensions panel (`Cmd+Shift+X`) 
-    - Search for 'codex Autocomplete'
+    - Open Extensions Panel (`Cmd+Shift+X`) 
+    - Search for 'codex autocomplete'
     - Click on install
 
 </br>
