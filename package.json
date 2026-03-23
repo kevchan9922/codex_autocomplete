@@ -3,7 +3,7 @@
   "displayName": "Codex Autocomplete",
   "description": "Open-source inline ghost-text autocomplete for VS Code with Codex OAuth and API key support.",
   "version": "1.0.1",
-  "publisher": "kevchan9922",
+  "publisher": "kc99",
   "repository": {
     "type": "git",
     "url": "https://github.com/kevchan9922/codex_autocomplete.git"
@@ -260,14 +260,6 @@
   },
   "icon": "docs/images/codex_autocomplete_256.png",
   "type": "commonjs",
-  "files": [
-    "out/**",
-    "docs/images/**",
-    "README.md",
-    "license.md",
-    "LICENSE",
-    "package.json"
-  ],
   "license": "MIT",
   "keywords": [
     "vscode-extension",

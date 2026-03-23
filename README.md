@@ -47,24 +47,16 @@ Three easy steps to get started:
 
     **Install the extension**
     
-    Via terminal command
-
-    ```bash
-    npm run package:vsix
-    code --install-extension *.vsix
-    ```
-
-    Or in VS Code: 
-    Extensions panel (`Cmd+Shift+X`), `...` menu -> **Install from VSIX...**
-
-    **Verify installation**
+    Via extension marketplace
 
     - Open Extensions panel (`Cmd+Shift+X`) 
-    - Confirm `Codex Autocomplete` is installed/enabled.
-</br>
-<img src="./docs/images/install-autocomplete-final.gif" alt="install autocomplete" width="75%" />
-</br>
+    - Search for 'codex Autocomplete'
+    - Click on install
 
+</br>
+<img src="./docs/images/extension_marketplace_install.png" alt="install extension marketplace" width="50%" />
+</br>
+</br>
 2) Login to your Codex account
     - Open the Command Palette with (`Cmd/Ctrl+Shift+P`)
     - Run `Codex Autocomplete: Login`
